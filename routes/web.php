@@ -66,7 +66,8 @@ Route::group(['prefix'=>'student',function(){
      })->where(['subject'=>'(chinese | english | math)']);
  }]);
 
-
+*/
+/*
 //練習七
 Route::pattern('student_no','s[0-9]{10}');
 Route::group(['prefix'=>'student'],function() {
@@ -87,3 +88,14 @@ Route::group(['prefix'=>'student'],function() {
 
 //練習八
 Route::get('/','HomeController@index');
+
+//練習九
+Route::pattern('student_no','s[0-9]{10}');
+
+Route::group(['prefix' => 'student'],function(){
+    Route::get('{student_no}',['as' => 'student', 'uses' => 'StudentController@getStudentData']);
+
+        Route::get('{student_no}/score/{subject?}',[
+                'as' => 'student.score',
+                'uses' => 'StudentController@getStudentScore'])->where(['subject' => '(chinese|english|math)']);
+});
